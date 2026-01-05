@@ -39,7 +39,6 @@
         </nav>
 
         <div class="cta-row">
-          <span class="kbd" title="Press / to focus the email field">/</span>
           <a class="button primary open-waitlist" href="#waitlist">Join waitlist</a>
         </div>
       </div>
@@ -69,48 +68,23 @@
             </p>
 
             <div class="hero-actions">
+              <a class="button ghost" href="#how">See how it works</a>
               <a class="button primary open-waitlist" href="#waitlist">Join the waitlist</a>
-              <a class="button" href="#how">See how it works</a>
-              <span class="hint">Press <span class="kbd">/</span> to jump to the email field</span>
+            </div>
+
+            <div class="hero-infograph" aria-hidden="true">
+              <div class="glow-line"></div>
+              <div class="infograph-row">
+                <span class="pill">Live context</span>
+                <span class="pill ok">CRM → Support</span>
+              </div>
+              <div class="infograph-row">
+                <span class="pill warn">1-click action</span>
+                <span class="pill">Invoice resend</span>
+              </div>
+              <div class="infograph-row code-lite">{"render":"card","format":"clean"}</div>
             </div>
           </div>
-
-          <aside class="hero-card reveal" aria-label="Product preview">
-            <div class="mini-ui">
-              <div class="mini-row">
-                <div>
-                  <div style="font-weight:650;">LinkedIn → CRM lookup</div>
-                  <small>Instant context on any profile</small>
-                </div>
-                <span class="pill ok">Live</span>
-              </div>
-
-              <div class="mini-row">
-                <div>
-                  <div style="font-weight:650;">Invoice actions</div>
-                  <small>Resend from inside your CRM</small>
-                </div>
-                <span class="pill warn">1 click</span>
-              </div>
-
-              <div class="mini-row">
-                <div>
-                  <div style="font-weight:650;">Multi-step flow</div>
-                  <small>Match + filter across tools</small>
-                </div>
-                <span class="pill">No pipeline</span>
-              </div>
-
-              <div class="codebox" role="note" aria-label="Example configuration">
-<pre style="margin:0;">{
-  "display_title": "Client context",
-  "lookup": "email → contact → last_meeting",
-  "transform": "pick + format",
-  "render": "card"
-}</pre>
-              </div>
-            </div>
-          </aside>
         </div>
       </div>
     </section>

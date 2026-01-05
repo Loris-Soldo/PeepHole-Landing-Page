@@ -139,25 +139,4 @@
     });
   };
   window.addEventListener("pointermove", onMove, { passive: true });
-
-  // 6) Keyboard shortcut: press "/" to focus email input
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "/" && !e.metaKey && !e.ctrlKey && !e.altKey) {
-      const active = document.activeElement;
-      const typing =
-        active && (active.tagName === "INPUT" || active.tagName === "TEXTAREA");
-      if (!typing) {
-        e.preventDefault();
-        if (panel && !panel.classList.contains("show")) {
-          openPanel();
-          window.setTimeout(
-            () => $("#email")?.focus({ preventScroll: true }),
-            140
-          );
-        } else {
-          $("#email")?.focus();
-        }
-      }
-    }
-  });
 })();
