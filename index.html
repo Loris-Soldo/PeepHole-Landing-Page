@@ -40,7 +40,7 @@
 
         <div class="cta-row">
           <span class="kbd" title="Press / to focus the email field">/</span>
-          <a class="button primary" href="#waitlist">Join waitlist</a>
+          <a class="button primary open-waitlist" href="#waitlist">Join waitlist</a>
         </div>
       </div>
     </div>
@@ -59,7 +59,7 @@
 
             <h1>
               You’ve been doing data integration
-              <span class="gradient-text">the hard way.</span><br />
+              <span class="gradient-text gt-hero">the hard way.</span><br />
               There’s a simpler one.
             </h1>
 
@@ -69,7 +69,7 @@
             </p>
 
             <div class="hero-actions">
-              <a class="button primary" href="#waitlist">Join the waitlist</a>
+              <a class="button primary open-waitlist" href="#waitlist">Join the waitlist</a>
               <a class="button" href="#how">See how it works</a>
               <span class="hint">Press <span class="kbd">/</span> to jump to the email field</span>
             </div>
@@ -119,7 +119,7 @@
     <section id="value">
       <div class="container">
         <div class="reveal">
-          <h2 class="section-title">All your data. <span class="gradient-text">One place.</span> Wherever you work.</h2>
+          <h2 class="section-title">All your data. <span class="gradient-text gt-value">One place.</span> Wherever you work.</h2>
           <p class="section-sub">
             Your tools shouldn’t live in silos. Your data shouldn’t either.
             PeepHole lets you pull live data from any source and display it right where your team already works.
@@ -152,7 +152,7 @@
     <section id="how">
       <div class="container">
         <div class="reveal">
-          <h2 class="section-title">It’s simple <span class="gradient-text">by design.</span></h2>
+          <h2 class="section-title">It’s simple <span class="gradient-text gt-how">by design.</span></h2>
           <p class="section-sub">Four steps. No surprises.</p>
         </div>
 
@@ -189,7 +189,7 @@
     <section id="catalog">
       <div class="container">
         <div class="reveal">
-          <h2 class="section-title">Any data. <span class="gradient-text">Any app.</span> Anywhere.</h2>
+          <h2 class="section-title">Any data. <span class="gradient-text gt-catalog">Any app.</span> Anywhere.</h2>
           <p class="section-sub">
             Pull data from any app or database and display it wherever it makes sense.
           </p>
@@ -235,7 +235,7 @@
     <section id="actions">
       <div class="container">
         <div class="reveal">
-          <h2 class="section-title">Do more <span class="gradient-text">without switching tools.</span></h2>
+          <h2 class="section-title">Do more <span class="gradient-text gt-actions">without switching tools.</span></h2>
           <p class="section-sub">
             Move between the same record across tools in one click. Trigger actions right where you are.
           </p>
@@ -265,7 +265,7 @@
     <section id="savings">
       <div class="container">
         <div class="reveal">
-          <h2 class="section-title">Less infrastructure. <span class="gradient-text">Lower costs.</span></h2>
+          <h2 class="section-title">Less infrastructure. <span class="gradient-text gt-savings">Lower costs.</span></h2>
           <p class="section-sub">
             By keeping integrations lightweight, you avoid spending thousands on data platforms.
             No servers to maintain. No pipelines to babysit. Just keep your connections valid. We handle the rest.
@@ -278,7 +278,7 @@
     <section id="security">
       <div class="container">
         <div class="reveal">
-          <h2 class="section-title">Control, visibility, <span class="gradient-text">and safety.</span></h2>
+          <h2 class="section-title">Control, visibility, <span class="gradient-text gt-security">and safety.</span></h2>
           <p class="section-sub">Everything stays under control.</p>
         </div>
 
@@ -312,12 +312,16 @@
           </p>
         </div>
 
-        <form id="waitlistForm" class="waitlist reveal" autocomplete="on">
-          <input id="email" class="input" type="email" name="email" placeholder="you@company.com" required />
-          <button class="button primary" type="submit">Join the waitlist</button>
-        </form>
-
-        <small class="reveal">No spam. No nonsense. Your inbox has suffered enough.</small>
+        <div class="waitlist-cta reveal">
+          <div class="cta-copy">
+            <p class="section-sub">Name, email, and where you’d plug PeepHole. One panel, one click.</p>
+            <small>No spam. No nonsense. Your inbox has suffered enough.</small>
+          </div>
+          <div class="cta-actions">
+            <a class="button primary open-waitlist" href="#waitlist">Join the waitlist</a>
+            <a class="button ghost" href="#how">See how it works</a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -341,6 +345,59 @@
   </footer>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="waitlistPanel" class="panel-backdrop" aria-hidden="true">
+    <div class="panel-card" role="dialog" aria-modal="true" aria-labelledby="waitlistTitle">
+      <button class="panel-close" type="button" aria-label="Close panel">×</button>
+      <div class="panel-shell">
+        <div class="panel-header">
+          <p class="chip">Private beta</p>
+          <h3 id="waitlistTitle">Join the waitlist</h3>
+          <p class="muted">Tell us who you are and how you’d use PeepHole. We’ll reach out with the next wave.</p>
+        </div>
+
+        <div id="waitlistFormView" class="panel-view active">
+          <form id="waitlistForm" class="panel-form" autocomplete="on">
+            <div class="form-grid">
+              <label class="field">
+                <span>First name</span>
+                <input id="firstName" type="text" name="firstName" placeholder="Camille" required />
+              </label>
+              <label class="field">
+                <span>Last name</span>
+                <input id="lastName" type="text" name="lastName" placeholder="Dubois" required />
+              </label>
+            </div>
+
+            <label class="field">
+              <span>Email</span>
+              <input id="email" type="email" name="email" placeholder="you@company.com" required />
+            </label>
+
+            <label class="field">
+              <span>Apps to connect + use case</span>
+              <textarea id="useCase" name="useCase" rows="4" placeholder="Ex: Pull Stripe MRR into HubSpot, show Zendesk sentiment in Salesforce, trigger invoices from CRM…"></textarea>
+            </label>
+
+            <div class="form-actions">
+              <button class="button primary" type="submit">Join the waitlist</button>
+              <button class="button" type="button" data-close-panel>Cancel</button>
+            </div>
+          </form>
+        </div>
+
+        <div id="waitlistSuccess" class="panel-view" role="status" aria-live="polite">
+          <div class="success-icon" aria-hidden="true">✔</div>
+          <h3>We’ve added you to our waiting list!</h3>
+          <p class="muted">We’ll reach out with next steps and invite details shortly.</p>
+          <div class="success-email" aria-live="polite">
+            <span class="icon-envelope" aria-hidden="true">✉</span>
+            <span id="successEmail">you@company.com</span>
+          </div>
+          <button class="button primary" type="button" data-close-panel>Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="./assets/js/main.js"></script>
 </body>

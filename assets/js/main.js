@@ -50,8 +50,12 @@
     });
   });
 
-  // 4) Faux waitlist form (client-side only)
+  // 4) Waitlist panel + faux form (client-side only)
   const form = $("#waitlistForm");
+  const formView = $("#waitlistFormView");
+  const successView = $("#waitlistSuccess");
+  const successEmail = $("#successEmail");
+  const panel = $("#waitlistPanel");
   const toast = $("#toast");
   const showToast = (msg) => {
     if (!toast) return;
@@ -60,19 +64,63 @@
     window.clearTimeout(showToast._t);
     showToast._t = window.setTimeout(() => toast.classList.remove("show"), 2400);
   };
+  const setPanelView = (isSuccess) => {
+    if (!formView || !successView) return;
+    formView.classList.toggle("active", !isSuccess);
+    successView.classList.toggle("active", isSuccess);
+  };
+  const openPanel = () => {
+    if (!panel) return;
+    panel.classList.add("show");
+    panel.setAttribute("aria-hidden", "false");
+    document.body.classList.add("panel-open");
+    setPanelView(false);
+    form?.reset();
+    window.setTimeout(() => $("#firstName")?.focus({ preventScroll: true }), 80);
+  };
+  const closePanel = () => {
+    if (!panel) return;
+    panel.classList.remove("show");
+    panel.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("panel-open");
+  };
+
+  $$(".open-waitlist").forEach((btn) =>
+    btn.addEventListener("click", (ev) => {
+      ev.preventDefault();
+      openPanel();
+    })
+  );
+
+  panel?.addEventListener("click", (ev) => {
+    if (ev.target === panel) closePanel();
+  });
+  $$(".panel-close, [data-close-panel]").forEach((btn) =>
+    btn.addEventListener("click", closePanel)
+  );
+  window.addEventListener("keydown", (ev) => {
+    if (ev.key === "Escape" && panel?.classList.contains("show")) closePanel();
+  });
 
   if (form) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
+      const firstName = $("#firstName")?.value?.trim() ?? "";
+      const lastName = $("#lastName")?.value?.trim() ?? "";
       const email = $("#email")?.value?.trim() ?? "";
+      if (!firstName || !lastName) {
+        showToast("Please add your name so we know who to reach out to.");
+        (!firstName ? $("#firstName") : $("#lastName"))?.focus();
+        return;
+      }
       if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         showToast("Enter a valid email (yes, even for a waitlist).");
         $("#email")?.focus();
         return;
       }
       // TODO: Replace this with your real endpoint (Formspark, ConvertKit, Supabase Edge Function, etc.)
-      form.reset();
-      showToast("You’re on the list. Your future self will thank you.");
+      setPanelView(true);
+      if (successEmail) successEmail.textContent = email;
     });
   }
 
@@ -100,7 +148,15 @@
         active && (active.tagName === "INPUT" || active.tagName === "TEXTAREA");
       if (!typing) {
         e.preventDefault();
-        $("#email")?.focus();
+        if (panel && !panel.classList.contains("show")) {
+          openPanel();
+          window.setTimeout(
+            () => $("#email")?.focus({ preventScroll: true }),
+            140
+          );
+        } else {
+          $("#email")?.focus();
+        }
       }
     }
   });
