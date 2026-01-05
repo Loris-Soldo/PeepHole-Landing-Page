@@ -1,22 +1,99 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2822
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+/* PeepHole landing interactions (vanilla JS) */
+(() => {
+  const $ = (q, el = document) => el.querySelector(q);
+  const $$ = (q, el = document) => Array.from(el.querySelectorAll(q));
 
-\f0\fs24 \cf0 const observer = new IntersectionObserver(\
-  entries => \{\
-    entries.forEach(entry => \{\
-      if (entry.isIntersecting) \{\
-        entry.target.classList.add("visible");\
-      \}\
-    \});\
-  \},\
-  \{ threshold: 0.2 \}\
-);\
-\
-document.querySelectorAll(".animate").forEach(el => \{\
-  observer.observe(el);\
-\});\
-}
+  // 1) Reveal on scroll
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) e.target.classList.add("visible");
+      }
+    },
+    { threshold: 0.18 }
+  );
+  $$(".reveal").forEach((el) => io.observe(el));
+
+  // 2) Active nav link while scrolling
+  const navLinks = $$(".nav a[href^='#']");
+  const sections = navLinks
+    .map((a) => document.querySelector(a.getAttribute("href")))
+    .filter(Boolean);
+
+  const spy = () => {
+    const y = window.scrollY + 120;
+    let current = sections[0];
+    for (const s of sections) {
+      if (s.offsetTop <= y) current = s;
+    }
+    navLinks.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === `#${current.id}`));
+  };
+  window.addEventListener("scroll", spy, { passive: true });
+  spy();
+
+  // 3) Smooth scrolling with offset for sticky topbar
+  navLinks.forEach((a) => {
+    a.addEventListener("click", (ev) => {
+      ev.preventDefault();
+      const id = a.getAttribute("href");
+      const target = document.querySelector(id);
+      if (!target) return;
+      const top = target.getBoundingClientRect().top + window.scrollY - 96;
+      window.scrollTo({ top, behavior: "smooth" });
+    });
+  });
+
+  // 4) Faux waitlist form (client-side only)
+  const form = $("#waitlistForm");
+  const toast = $("#toast");
+  const showToast = (msg) => {
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.classList.add("show");
+    window.clearTimeout(showToast._t);
+    showToast._t = window.setTimeout(() => toast.classList.remove("show"), 2400);
+  };
+
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = $("#email")?.value?.trim() ?? "";
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showToast("Entre un email valide (oui, même pour une démo).");
+        $("#email")?.focus();
+        return;
+      }
+      // TODO: replace with your endpoint (e.g. Formspark, ConvertKit, Supabase edge function)
+      form.reset();
+      showToast("Inscription enregistrée. Ton futur moi te remerciera.");
+    });
+  }
+
+  // 5) Gentle parallax for blobs (super subtle)
+  const blobs = $$(".blob");
+  let raf = null;
+  const onMove = (ev) => {
+    const x = (ev.clientX / window.innerWidth - 0.5) * 2;
+    const y = (ev.clientY / window.innerHeight - 0.5) * 2;
+    if (raf) cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      blobs.forEach((b, i) => {
+        const s = 10 + i * 6;
+        b.style.transform = `translate(${x * s}px, ${y * s}px)`;
+      });
+    });
+  };
+  window.addEventListener("pointermove", onMove, { passive: true });
+
+  // 6) Keyboard shortcut: press "/" to focus email input
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "/" && !e.metaKey && !e.ctrlKey && !e.altKey) {
+      const active = document.activeElement;
+      const typing = active && (active.tagName === "INPUT" || active.tagName === "TEXTAREA");
+      if (!typing) {
+        e.preventDefault();
+        $("#email")?.focus();
+      }
+    }
+  });
+})();

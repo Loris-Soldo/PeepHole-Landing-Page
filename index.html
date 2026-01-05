@@ -11,24 +11,262 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <meta property="og:title" content="PeepHole" />
-    <meta
-      property="og:description"
-      content="Connect the data of all your tools seamlessly."
-    />
+    <meta property="og:description" content="Connect the data of all your tools seamlessly." />
     <meta property="og:type" content="website" />
 
     <link rel="stylesheet" href="assets/css/main.css" />
   </head>
 
   <body>
-    <!-- test visuel minimal -->
-    <section>
-      <div class="animate">
-        <h1>PeepHole</h1>
-        <p>If you see this, HTML is rendering correctly.</p>
+    <div class="bg-blobs" aria-hidden="true">
+      <div class="blob b1" style="left:6%; top:4%"></div>
+      <div class="blob b2" style="left:62%; top:10%"></div>
+      <div class="blob b3" style="left:30%; top:68%"></div>
+    </div>
+
+    <!-- Floating top bar -->
+    <div class="topbar-wrap">
+      <div class="container">
+        <div class="topbar">
+          <a class="brand" href="#top" aria-label="PeepHole home">
+            <div class="logo" aria-hidden="true"></div>
+            <span>PeepHole</span>
+          </a>
+
+          <nav class="nav" aria-label="Primary">
+            <a href="#features">Features</a>
+            <a href="#how">How it works</a>
+            <a href="#proof">Proof</a>
+            <a href="#waitlist">Waitlist</a>
+          </nav>
+
+          <div class="cta-row">
+            <span class="kbd" title="Press / to focus the email field">/</span>
+            <a class="button" href="#waitlist">Get access</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero -->
+    <main id="top" class="hero">
+      <section class="container">
+        <div class="hero-grid">
+          <div class="reveal">
+            <div class="eyebrow">
+              <span class="dot" aria-hidden="true"></span>
+              <span>Live data overlays for modern teams</span>
+            </div>
+
+            <h1>
+              Put <span class="gradient-text">any tool’s data</span> anywhere.
+              Without rebuilding your stack.
+            </h1>
+
+            <p class="lead">
+              PeepHole lets you connect sources, map fields, and display live context inside the apps you already use.
+              Think “CRM cards”, but for everything.
+            </p>
+
+            <div class="hero-actions">
+              <a class="button primary" href="#waitlist">Join the waitlist</a>
+              <a class="button" href="#features">See features</a>
+              <span class="hint">No sales call. No shame.</span>
+            </div>
+          </div>
+
+          <aside class="hero-card reveal" aria-label="Product preview">
+            <div class="mini-ui">
+              <div class="mini-row">
+                <div>
+                  <strong>HubSpot</strong><br />
+                  <small>Account: Weigerding</small>
+                </div>
+                <span class="pill ok">Connected</span>
+              </div>
+
+              <div class="mini-row">
+                <div>
+                  <strong>Notion</strong><br />
+                  <small>Board: Implementation</small>
+                </div>
+                <span class="pill warn">Mapping</span>
+              </div>
+
+              <div class="mini-row">
+                <div>
+                  <strong>Intercom</strong><br />
+                  <small>Company: ACME</small>
+                </div>
+                <span class="pill err">Missing key</span>
+              </div>
+
+              <div class="codebox" role="img" aria-label="Example JSON payload">
+<pre>{
+  "config": { "display_title": "Infos Client", "sections": [
+    { "name": "Coordonnées", "fields": ["Name","Email"] }
+  ]},
+  "data": [{ "Name": "Jean", "Email": "jean@example.com" }]
+}</pre>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- Logos row -->
+      <section class="container" style="padding-top: 12px;">
+        <div class="reveal" style="display:flex; gap:12px; flex-wrap:wrap; align-items:center; color: rgba(245,247,255,.55);">
+          <span class="pill">HubSpot</span>
+          <span class="pill">Notion</span>
+          <span class="pill">Intercom</span>
+          <span class="pill">Salesforce</span>
+          <span class="pill">Zendesk</span>
+          <span class="pill">Google Sheets</span>
+        </div>
+      </section>
+    </main>
+
+    <!-- Features -->
+    <section id="features">
+      <div class="container">
+        <div class="reveal">
+          <h2 class="section-title">The “clean” way to ship context.</h2>
+          <p class="section-sub">
+            Dark background, subtle gradients, frosted cards, and micro-interactions. Your favorite modern startup aesthetic,
+            but with actual UX.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card reveal">
+            <div class="icon">🔌</div>
+            <h3>Connect sources in minutes</h3>
+            <p>OAuth where possible, keys where needed. Keep credentials out of your front-end.</p>
+          </div>
+
+          <div class="card reveal">
+            <div class="icon">🧭</div>
+            <h3>Map fields once</h3>
+            <p>Define “golden” fields and let your overlays resolve conflicts without chaos.</p>
+          </div>
+
+          <div class="card reveal">
+            <div class="icon">🪟</div>
+            <h3>Display anywhere</h3>
+            <p>Embed widgets in HubSpot, Gmail, Zendesk, internal tools or a Chrome extension.</p>
+          </div>
+        </div>
       </div>
     </section>
 
+    <!-- How it works -->
+    <section id="how">
+      <div class="container">
+        <div class="reveal">
+          <h2 class="section-title">
+            Build a pipeline, not a mess of point-to-point “integrations”.
+          </h2>
+          <p class="section-sub">
+            A simple, repeatable flow: connect → validate → dedupe → display.
+          </p>
+        </div>
+
+        <div class="split">
+          <div class="card reveal">
+            <h3><span class="gradient-text">1.</span> Connect</h3>
+            <p>
+              Add your tools. Choose the object (company, contact, ticket). Define the matching key (domain, email, ID).
+            </p>
+            <div style="margin-top: 12px; display:flex; gap:8px; flex-wrap:wrap;">
+              <span class="pill ok">OAuth</span>
+              <span class="pill">API keys</span>
+              <span class="pill">Webhooks</span>
+              <span class="pill">CSV imports</span>
+            </div>
+          </div>
+
+          <div class="card reveal">
+            <h3><span class="gradient-text">2.</span> Display</h3>
+            <p>
+              Choose a card template (glass, compact, table). Drop it in your app. Get the keep-it-simple dopamine hit.
+            </p>
+            <div style="margin-top: 12px;">
+              <small>Tip: press <span class="kbd">/</span> to jump to the waitlist field.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proof / testimonials -->
+    <section id="proof">
+      <div class="container">
+        <div class="reveal">
+          <h2 class="section-title">Proof (the polite word for “social validation”).</h2>
+          <p class="section-sub">Lorem ipsum for now, because reality takes longer than CSS.</p>
+        </div>
+
+        <div class="split">
+          <div class="quote reveal">
+            <p>
+              “We stopped copy-pasting data between tools. Now it just… shows up where people work.”
+            </p>
+            <div class="who">VP Ops, B2B Services</div>
+          </div>
+
+          <div class="quote reveal">
+            <p>
+              “It feels like the missing layer between CRM and everything else. Also, the UI is suspiciously nice.”
+            </p>
+            <div class="who">CTO, multi-agency group</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Waitlist -->
+    <section id="waitlist">
+      <div class="container">
+        <div class="card reveal" style="padding: 26px; border-radius: 28px;">
+          <h2 class="section-title" style="margin-bottom: 8px;">Get early access.</h2>
+          <p class="section-sub" style="margin:0;">
+            Drop your email. You'll get updates when there's something real to show.
+          </p>
+
+          <form id="waitlistForm" class="waitlist" autocomplete="on">
+            <input id="email" class="input" type="email" placeholder="you@company.com" required />
+            <button class="button primary" type="submit">Join waitlist</button>
+            <span class="hint">No spam. Just occasional existential updates.</span>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container footer-row">
+        <div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <div class="logo" aria-hidden="true" style="width:24px;height:24px;border-radius:9px;"></div>
+            <strong>PeepHole</strong>
+          </div>
+          <small>© <span id="year"></span> All rights reserved.</small>
+        </div>
+
+        <div class="footer-links">
+          <a href="#features">Features</a>
+          <a href="#how">How</a>
+          <a href="#waitlist">Waitlist</a>
+          <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+        </div>
+      </div>
+    </footer>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
     <script src="assets/js/main.js"></script>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
   </body>
 </html>
