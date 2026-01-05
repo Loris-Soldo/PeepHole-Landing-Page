@@ -423,7 +423,22 @@ section{
   background: rgba(0,0,0,.28);
 }
 .quote p{ color: rgba(245,247,255,.78); }
-.quote .who{ margin-top: 10px; font-size: 13px; showing: block; color: rgba(245,247,255,.55); }
+.quote .who{ margin-top: 10px; font-size: 13px; display: block; color: rgba(245,247,255,.55); }
+
+/* Catalog note */
+.catalog-note{
+  margin-top: 14px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(122,167,255,.08);
+  border: 1px solid rgba(122,167,255,.22);
+  color: rgba(245,247,255,.85);
+  max-width: 56ch;
+}
+.catalog-note .accent{
+  color: var(--a2);
+  font-weight: 650;
+}
 
 /* Waitlist */
 .waitlist{

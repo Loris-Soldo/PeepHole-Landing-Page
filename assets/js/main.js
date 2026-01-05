@@ -3,6 +3,10 @@
   const $ = (q, el = document) => el.querySelector(q);
   const $$ = (q, el = document) => Array.from(el.querySelectorAll(q));
 
+  // Year in footer
+  const yearEl = $("#year");
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
   // 1) Reveal on scroll
   const io = new IntersectionObserver(
     (entries) => {
@@ -21,12 +25,15 @@
     .filter(Boolean);
 
   const spy = () => {
+    if (!sections.length) return;
     const y = window.scrollY + 120;
     let current = sections[0];
     for (const s of sections) {
       if (s.offsetTop <= y) current = s;
     }
-    navLinks.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === `#${current.id}`));
+    navLinks.forEach((a) =>
+      a.classList.toggle("active", a.getAttribute("href") === `#${current.id}`)
+    );
   };
   window.addEventListener("scroll", spy, { passive: true });
   spy();
@@ -59,13 +66,13 @@
       e.preventDefault();
       const email = $("#email")?.value?.trim() ?? "";
       if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showToast("Entre un email valide (oui, même pour une démo).");
+        showToast("Enter a valid email (yes, even for a waitlist).");
         $("#email")?.focus();
         return;
       }
-      // TODO: replace with your endpoint (e.g. Formspark, ConvertKit, Supabase edge function)
+      // TODO: Replace this with your real endpoint (Formspark, ConvertKit, Supabase Edge Function, etc.)
       form.reset();
-      showToast("Inscription enregistrée. Ton futur moi te remerciera.");
+      showToast("You’re on the list. Your future self will thank you.");
     });
   }
 
@@ -89,7 +96,8 @@
   window.addEventListener("keydown", (e) => {
     if (e.key === "/" && !e.metaKey && !e.ctrlKey && !e.altKey) {
       const active = document.activeElement;
-      const typing = active && (active.tagName === "INPUT" || active.tagName === "TEXTAREA");
+      const typing =
+        active && (active.tagName === "INPUT" || active.tagName === "TEXTAREA");
       if (!typing) {
         e.preventDefault();
         $("#email")?.focus();
