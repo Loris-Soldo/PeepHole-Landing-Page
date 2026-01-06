@@ -124,19 +124,14 @@
     });
   }
 
-  // 5) Gentle parallax for blobs (super subtle)
-  const blobs = $$(".blob");
-  let raf = null;
-  const onMove = (ev) => {
-    const x = (ev.clientX / window.innerWidth - 0.5) * 2;
-    const y = (ev.clientY / window.innerHeight - 0.5) * 2;
-    if (raf) cancelAnimationFrame(raf);
-    raf = requestAnimationFrame(() => {
-      blobs.forEach((b, i) => {
-        const s = 10 + i * 6;
-        b.style.transform = `translate(${x * s}px, ${y * s}px)`;
-      });
-    });
-  };
-  window.addEventListener("pointermove", onMove, { passive: true });
+  // 5) Slow down the background video so the 8s clip lasts ~1 minute
+  const bgVideo = $("#bgVideo");
+  if (bgVideo) {
+    const setRate = () => {
+      bgVideo.playbackRate = 0.125;
+    };
+    bgVideo.addEventListener("loadedmetadata", setRate);
+    bgVideo.addEventListener("play", setRate);
+    setRate();
+  }
 })();
