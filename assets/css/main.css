@@ -44,7 +44,7 @@
   --focus: 0 0 0 2px rgba(128,183,255,.18), 0 0 0 1px rgba(255,255,255,.18) inset;
 
   /* Background tuning */
-  --noise-opacity: 0.20;
+  --noise-opacity: 0.50;
 }
 
 *{ box-sizing:border-box; }
