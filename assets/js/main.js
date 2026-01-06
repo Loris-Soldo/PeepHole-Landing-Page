@@ -19,7 +19,7 @@
   $$(".reveal").forEach((el) => io.observe(el));
 
   // 2) Active nav link while scrolling
-  const navLinks = $$(".nav a[href^='#']");
+  const navLinks = $$(".nav-item[href^='#']");
   const sections = navLinks
     .map((a) => document.querySelector(a.getAttribute("href")))
     .filter(Boolean);

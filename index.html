@@ -22,6 +22,14 @@
     </filter>
   </svg>
 
+  <!-- SVG Filter for glass distortion -->
+  <svg class="glass-svg" aria-hidden="true" style="display: none" xmlns="http://www.w3.org/2000/svg">
+    <filter id="glass-distortion">
+      <feTurbulence type="turbulence" baseFrequency="0.008" numOctaves="2" result="noise" />
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="77" />
+    </filter>
+  </svg>
+
   <!-- Floating top bar -->
   <div class="topbar-wrap">
     <div class="container">
@@ -31,12 +39,19 @@
           <span>PeepHole</span>
         </a>
 
-        <nav class="nav" aria-label="Primary">
-          <a href="#value">Value</a>
-          <a href="#how">How it works</a>
-          <a href="#catalog">Catalog</a>
-          <a href="#actions">Actions</a>
-          <a href="#security">Control</a>
+        <nav class="glass-nav" aria-label="Primary">
+          <div class="glass-filter"></div>
+          <div class="glass-overlay"></div>
+          <div class="glass-specular"></div>
+          <div class="glass-content">
+            <ul class="nav-list">
+              <li><a href="#value" class="nav-item">Value</a></li>
+              <li><a href="#how" class="nav-item">How it works</a></li>
+              <li><a href="#catalog" class="nav-item">Catalog</a></li>
+              <li><a href="#actions" class="nav-item">Actions</a></li>
+              <li><a href="#security" class="nav-item">Control</a></li>
+            </ul>
+          </div>
         </nav>
 
         <div class="cta-row">
