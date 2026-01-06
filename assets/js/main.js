@@ -124,14 +124,4 @@
     });
   }
 
-  // 5) Slow down the background video so the 8s clip lasts ~1 minute
-  const bgVideo = $("#bgVideo");
-  if (bgVideo) {
-    const setRate = () => {
-      bgVideo.playbackRate = 0.125;
-    };
-    bgVideo.addEventListener("loadedmetadata", setRate);
-    bgVideo.addEventListener("play", setRate);
-    setRate();
-  }
 })();
